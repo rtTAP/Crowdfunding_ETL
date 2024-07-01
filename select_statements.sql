@@ -1,14 +1,19 @@
--- Import data into contacts table
-\COPY crowdfunding_schema.contacts(contact_id, first_name, last_name, email) FROM 'Resources/contacts.csv' DELIMITER ',' CSV HEADER;
-
 -- Import data into category table
-\COPY crowdfunding_schema.category(category_id, category) FROM 'Resources/category.csv' DELIMITER ',' CSV HEADER;
+\CHOOSE FROM crowdfunding_db menu SCHEMAS(2) crowdfunding_schema TABLES(4) category(category_id, category) left click select Import/ExportData 
+SELECT Import SELECT category in filename field then SELECT Format field CSV CLICK on OK;
+
+-- Import data into contacts table
+\CHOOSE FROM crowdfunding_db menu SCHEMAS(2) crowdfunding_schema TABLES(4) subcategory(subcategory_id, subcategory) left click select Import/ExportData 
+SELECT Import SELECT subcategory in filename field then SELECT Format field CSV CLICK on OK;
 
 -- Import data into subcategory table
-\COPY crowdfunding_schema.subcategory(subcategory_id, subcategory) FROM 'Resources/subcategory.csv' DELIMITER ',' CSV HEADER;
+\CHOOSE FROM crowdfunding_db menu SCHEMAS(2) crowdfunding_schema TABLES(4) contacts(contact_id, first_name, last_name, email) left click select Import/ExportData 
+SELECT Import SELECT contacts in filename field then SELECT Format field CSV CLICK on OK;
 
 -- Import data into campaign table
-\COPY crowdfunding_schema.campaign(cf_id, contact_id, company_name, description, goal, pledged, outcome, backers_count, country, currency, launch_date, end_date, category_id, subcategory_id) FROM 'Resources/campaign.csv' DELIMITER ',' CSV HEADER;
+\CHOOSE crowdfunding_db menu SCHEMAS(2) crowdfunding_schema TABLES(4) campaign(cf_id, contact_id, company_name, description, goal, pledged, outcome, backers_count, 
+country, currency, launch_date, end_date, category_id, subcategory_id) left click select Import/ExportData SELECT Import 
+SELECT contacts in filename field then SELECT Format field CSV CLICK on OK;
 
 -- Verify contacts table
 SELECT * FROM crowdfunding_schema.contacts LIMIT 5;

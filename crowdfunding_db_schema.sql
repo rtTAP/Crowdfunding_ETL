@@ -1,3 +1,6 @@
+--- Create database
+CREATE DATABASE IF NOT EXISTS crowdfunding_db;
+
 --- Create crowdfunding schema
 CREATE SCHEMA crowdfunding_schema;
 
